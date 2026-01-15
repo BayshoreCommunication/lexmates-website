@@ -1,4 +1,10 @@
-export const servicesData = {
+export interface servicesData {
+  name: string;
+  slug: string;
+  description: string[];
+}
+
+export const servicesData: Record<string, servicesData> = {
   litigation: {
     name: "LITIGATION",
     slug: "litigation",
