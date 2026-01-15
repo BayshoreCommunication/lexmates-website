@@ -2,6 +2,8 @@ import AboutLexmates from "@/components/home/AboutLexmates";
 import FounderProfile from "@/components/home/FounderProfile";
 import Hero from "@/components/home/Hero";
 import ServicesSection from "@/components/home/ServicesSection";
+import WhyChoose from "@/components/home/WhyChoose";
+import WhyChooseLexmates from "@/components/home/WhyChooseLexmates";
 
 export default function Home() {
   return (
@@ -32,6 +34,8 @@ export default function Home() {
         image="/images/home/founder/trip-man-2.png"
         backgroundImage="/images/home/founder/bg.png"
       />
+      <WhyChooseLexmates />
+      <WhyChoose />
     </>
   );
 }
