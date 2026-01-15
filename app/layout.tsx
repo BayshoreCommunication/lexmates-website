@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "./providers";
 import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 // import { DM_Mono } from 'next/font/google';
 // import { Inter, Playfair_Display } from 'next/font/google';// Your global styles file
 
@@ -13,7 +14,6 @@ import Header from "@/components/layout/Header";
 //   display: 'swap', // 'swap' ensures the fallback font is used until DM Mono loads
 //   variable: '--font-dm-mono', // Define a CSS variable if you plan to use it with Tailwind CSS
 // });
-
 
 // const playfair = Playfair_Display({
 //   subsets: ['latin'],
@@ -47,8 +47,8 @@ export default function RootLayout({
     <html lang="en">
       <body className="bg-white">
         <Header />
-          <main>{children}</main>
-        
+        <main>{children}</main>
+        <Footer />
       </body>
     </html>
   );
