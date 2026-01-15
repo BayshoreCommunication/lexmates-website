@@ -3,21 +3,20 @@ import Image from "next/image";
 export default function AboutLexmates() {
   return (
     <section className="w-full bg-[#F8F9FBFB]">
-      <div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8 py-8 md:py-16">
-        <div className="flex items-start gap-10">
+      <div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8 py-10 md:py-16">
+        <div className="flex flex-col lg:flex-row items-start gap-6 lg:gap-10">
           {/* Left: Image */}
-          
-            <div className=" w-full max-w-xl">
-              <Image
-                src="/images/home/about/img.png"
-                alt="Lexmates Advocates & Legal Advisers"
-                width={1000}
-                height={800}
-                className="object-contain w-full "
-                priority
-              />
-            </div>
-        
+
+          <div className=" w-full max-w-xl">
+            <Image
+              src="/images/home/about/img.png"
+              alt="Lexmates Advocates & Legal Advisers"
+              width={1000}
+              height={800}
+              className="object-contain w-full "
+              priority
+            />
+          </div>
 
           {/* Right: Content */}
           <div className="text-gray-800 text-base leading-relaxed w-full  mx-auto flex-1">

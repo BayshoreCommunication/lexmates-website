@@ -13,8 +13,8 @@ export default function WhyChooseLexmates() {
       <div className="absolute inset-0 bg-black/40" />
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center px-4 py-24">
-        <h2 className="mb-14 text-center text-3xl font-semibold text-white md:text-4xl lg:text-5xl">
+      <div className="relative z-10 flex flex-col items-center justify-center px-8  py-8 lg:py-16">
+        <h2 className="mb-6 lg:mb-10 text-center text-3xl font-semibold text-white md:text-4xl lg:text-5xl">
           Why Choose Lexmates?
         </h2>
 

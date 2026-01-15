@@ -27,11 +27,24 @@ export default function FounderProfile({
         backgroundImage: `url(${backgroundImage})`,
       }}
     >
-      <div className="mx-auto max-w-[1320px]  px-8">
+      <div className="mx-auto max-w-[1320px]  px-8 py-8 lg:pt-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-          
+          {/* Right Image (but mobile first) */}
+          <div className="flex justify-center lg:justify-end order-first lg:order-last">
+            <div className="relative w-full max-w-[420px]">
+              <Image
+                src={image}
+                alt={name}
+                width={420}
+                height={520}
+                className="object-contain"
+                priority
+              />
+            </div>
+          </div>
+
           {/* Left Content */}
-          <div>
+          <div className="order-last lg:order-first">
             <p className="text-lg tracking-widest text-gray-500 uppercase mb-2">
               {name}
             </p>
@@ -51,21 +64,6 @@ export default function FounderProfile({
               {button.label}
             </a>
           </div>
-
-          {/* Right Image */}
-          <div className="flex justify-center lg:justify-end">
-            <div className="relative w-full max-w-[420px]">
-              <Image
-                src={image}
-                alt={name}
-                width={420}
-                height={520}
-                className="object-contain"
-                priority
-              />
-            </div>
-          </div>
-
         </div>
       </div>
     </section>

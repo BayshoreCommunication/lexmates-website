@@ -62,13 +62,13 @@ export default function WhyChoose() {
       {/* <div className="absolute inset-0 bg-black/40" /> */}
 
       {/* ===== Tabs / Navbar ===== */}
-      <div className="relative z-20 mx-auto max-w-6xl px-4 pt-16">
+      <div className="relative z-20 mx-auto max-w-6xl px-8 pt-8 lg:pt-14">
         <div className="flex flex-wrap justify-center gap-8 border-b  text-lg font-semibold">
           {whyChooseData.map((item) => (
             <button
               key={item.id}
               onClick={() => setActive(item.id)}
-              className={`relative pb-3 transition ${
+              className={`relative pb-0 transition ${
                 active === item.id
                   ? "text-orange-500 text-lg font-semibold"
                   : "text-gray-600 hover:text-black text-md font-semibold"
@@ -84,7 +84,7 @@ export default function WhyChoose() {
       </div>
 
       {/* ===== Content ===== */}
-      <div className="relative z-10 mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 px-4 py-24 md:grid-cols-2">
+      <div className="relative z-10 mx-auto grid max-w-6xl grid-cols-1 items-center gap-6 lg:10 px-4 py-8 lg:py-16 md:grid-cols-2">
         {/* Image */}
         <div className="relative  w-full overflow-hidden rounded-lg shadow-lg">
           <Image
