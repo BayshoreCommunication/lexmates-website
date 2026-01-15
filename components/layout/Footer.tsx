@@ -91,7 +91,7 @@ export default function Footer() {
         {/* Divider */}
         <div className="border-t border-gray-500/30 mt-12 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-gray-400">
-            © Copyright Lexmates 2021. All Right Reserved.
+            © Copyright Lexmates 2026. All Right Reserved.
           </p>
 
           <Link
