@@ -31,7 +31,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
         ]}
       />
 
-      <section className="max-w-[1640px] mx-auto px-8 py-8 md:my-8 grid grid-cols-1 lg:grid-cols-4 gap-10">
+      <section className="max-w-[1320px] mx-auto px-8 py-8 md:my-8 grid grid-cols-1 lg:grid-cols-4 gap-10">
         
         {/* Sidebar */}
         <aside className="lg:col-span-1 space-y-8">

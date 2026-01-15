@@ -12,7 +12,7 @@ export default function Header() {
     <header className="w-full border-b border-gray-200">
       {/* Top Info Bar */}
       <div className="bg-gray-50 text-sm text-gray-700">
-        <div className="mx-auto max-w-[1640px] px-4">
+        <div className="mx-auto max-w-[1320px] px-4">
           <div className="flex flex-col gap-2 py-2 md:flex-row md:items-center md:justify-between">
             <div className="flex items-center gap-2">
               <MapPin size={16} />
@@ -40,7 +40,7 @@ export default function Header() {
 
       {/* Main Navbar */}
       <div className="bg-white">
-        <div className="mx-auto max-w-[1640px] px-4">
+        <div className="mx-auto max-w-[1320px] px-4">
           <div className="flex h-20 items-center justify-between">
             {/* Logo */}
             <Link href="/" className="flex items-center">
