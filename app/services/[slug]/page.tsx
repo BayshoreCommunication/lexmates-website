@@ -41,13 +41,13 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
             <Image
               src="/images/home/service/title-img.png"
               alt="Experience"
-              width={400}
-              height={300}
-              className="object-cover"
+              width={1000}
+              height={800}
+              className="object-contain"
             />
-            <div className="absolute inset-0 bg-black/60 flex flex-col items-center justify-center text-white text-center p-6">
-              <h3 className="text-5xl font-bold mb-2">25 Years of</h3>
-              <p className="mb-4 text-3 xl">Experience In This Field</p>
+            <div className="absolute inset-0 bg-black/60 flex flex-col items-center justify-center text-white text-center p-8">
+              <h3 className="text-4xl font-bold mb-2">25 Years of</h3>
+              <p className="mb-4 text-4xl">Experience In This Field</p>
               <Link
                 href="/contact"
                 className="bg-orange-500 hover:bg-orange-600 transition px-4 py-2 text-sm font-semibold rounded"
