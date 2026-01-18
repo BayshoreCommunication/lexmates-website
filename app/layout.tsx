@@ -23,7 +23,7 @@ import Footer from "@/components/layout/Footer";
 // });
 
 export const metadata: Metadata = {
-  title: "Lexmates Website",
+  title: "Lexmates",
   description: "Lexmates Website",
   metadataBase: new URL("https://mccullochlawpa-website.vercel.app"),
   alternates: {
