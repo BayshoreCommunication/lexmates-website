@@ -9,22 +9,29 @@ interface Breadcrumb {
 interface PageHeroProps {
   title: string;
   breadcrumbs: Breadcrumb[];
+  imageSrc: string;
+  imageAlt?: string;
 }
 
-export default function Breadcrumb({ title, breadcrumbs }: PageHeroProps) {
+export default function Breadcrumb({
+  title,
+  breadcrumbs,
+  imageSrc,
+  imageAlt = "Page background",
+}: PageHeroProps) {
   return (
     <section className="relative h-[320px] md:h-[380px] w-full overflow-hidden">
-      {/* Shared Background Image */}
+      {/* Background Image */}
       <Image
-        src="/images/breadcrumb/bg.png"
-        alt="Page background"
+        src={imageSrc}
+        alt={imageAlt}
         fill
         priority
         className="object-cover"
       />
 
       {/* Overlay */}
-      <div className="absolute inset-0 bg-black/60" />
+      <div className="absolute inset-0 bg-black/80" />
 
       {/* Content */}
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">

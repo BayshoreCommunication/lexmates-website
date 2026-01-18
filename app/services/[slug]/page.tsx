@@ -24,6 +24,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
     <>
       <Breadcrumb
         title="Service"
+        imageSrc= "/images/breadcrumb/service-bg.png"
         breadcrumbs={[
           { label: "Home", href: "/" },
           { label: "Service", href: "/services" },
