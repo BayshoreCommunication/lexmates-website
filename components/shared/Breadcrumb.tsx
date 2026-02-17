@@ -9,29 +9,26 @@ interface Breadcrumb {
 interface PageHeroProps {
   title: string;
   breadcrumbs: Breadcrumb[];
-  imageSrc: string;
-  imageAlt?: string;
 }
 
 export default function Breadcrumb({
   title,
   breadcrumbs,
-  imageSrc,
-  imageAlt = "Page background",
 }: PageHeroProps) {
   return (
     <section className="relative h-[320px] md:h-[380px] w-full overflow-hidden">
+      
       {/* Background Image */}
       <Image
-        src={imageSrc}
-        alt={imageAlt}
+        src="/images/breadcrumb/bg.png"   // <-- MUST start with /
+        alt="breadcrumb background"
         fill
         priority
         className="object-cover"
       />
 
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-black/80" />
+      {/* Optional Overlay */}
+      {/* <div className="absolute inset-0 bg-black/60" /> */}
 
       {/* Content */}
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
@@ -39,19 +36,18 @@ export default function Breadcrumb({
           {title}
         </h1>
 
-        {/* Breadcrumb */}
         <nav className="flex items-center gap-2 text-sm text-gray-200">
           {breadcrumbs.map((item, index) => (
             <span key={index} className="flex items-center gap-2">
               {item.href ? (
                 <Link
                   href={item.href}
-                  className="hover:text-orange-400 transition-colors"
+                  className="hover:text-orange-500 transition-colors"
                 >
                   {item.label}
                 </Link>
               ) : (
-                <span className="text-orange-400 capitalize">
+                <span className="text-orange-500 capitalize">
                   {item.label}
                 </span>
               )}

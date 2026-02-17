@@ -94,7 +94,7 @@ export default function WhyChoose() {
             height={800}
             className="object-cover"
           />
-          <div className="absolute inset-0 bg-blue-900/30" />
+          {/* <div className="absolute inset-0 bg-blue-900/30" /> */}
         </div>
 
         {/* Text */}
