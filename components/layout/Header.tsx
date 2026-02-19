@@ -1,21 +1,41 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { MapPin, Phone, Mail, Menu, X } from "lucide-react";
 
-export default function Header() {
-  const [open, setOpen] = useState(false);
+interface NavLink {
+  name: string;
+  path: string;
+}
 
-  // Prevent body scroll when mobile menu is open
+export default function Header() {
+  const [open, setOpen] = useState<boolean>(false);
+  const pathname = usePathname();
+
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "auto";
   }, [open]);
 
+  // ✅ Properly Typed
+  const navLinks: NavLink[] = [
+    { name: "Home", path: "/" },
+    { name: "About Us", path: "/about" },
+    { name: "Services", path: "/service" },
+    { name: "Blog", path: "/blog" },
+    { name: "Useful Links", path: "/links" },
+    { name: "Contact Us", path: "/contact" },
+  ];
+
+  const isActive = (path: string): boolean => {
+    if (path === "/") return pathname === "/";
+    return pathname.startsWith(path);
+  };
+
   return (
     <>
-      {/* Fixed Header */}
       <header className="fixed top-0 left-0 z-50 w-full border-b border-gray-200 bg-white shadow-sm">
         {/* Top Info Bar */}
         <div className="bg-gray-50 text-sm text-gray-700">
@@ -61,25 +81,20 @@ export default function Header() {
               </Link>
 
               {/* Desktop Menu */}
-              <nav className="hidden md:flex items-center gap-8 text-sm font-medium uppercase text-gray-700">
-                <Link href="/" className="hover:text-blue-600">
-                  Home
-                </Link>
-                <Link href="/about" className="hover:text-blue-600">
-                  About Us
-                </Link>
-                <Link href="/service" className="hover:text-blue-600">
-                  Services
-                </Link>
-                <Link href="/blog" className="hover:text-blue-600">
-                  Blog
-                </Link>
-                <Link href="/links" className="hover:text-blue-600">
-                  Useful Links
-                </Link>
-                <Link href="/contact" className="hover:text-blue-600">
-                  Contact Us
-                </Link>
+              <nav className="hidden md:flex items-center gap-8 text-sm font-medium uppercase">
+                {navLinks.map((link: NavLink) => (
+                  <Link
+                    key={link.path}
+                    href={link.path}
+                    className={`transition ${
+                      isActive(link.path)
+                        ? "text-blue-600 border-b-2 border-blue-600 pb-1"
+                        : "text-gray-700 hover:text-blue-600"
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                ))}
               </nav>
 
               {/* Mobile Toggle */}
@@ -88,11 +103,7 @@ export default function Header() {
                 className="md:hidden"
                 aria-label="Toggle Menu"
               >
-                {open ? (
-                  <X size={28} className="text-black" />
-                ) : (
-                  <Menu size={28} className="text-black" />
-                )}
+                {open ? <X size={28} /> : <Menu size={28} />}
               </button>
             </div>
           </div>
@@ -100,32 +111,27 @@ export default function Header() {
           {/* Mobile Menu */}
           {open && (
             <div className="md:hidden border-t border-gray-200 bg-white">
-              <nav className="flex flex-col gap-4 px-4 py-6 text-sm font-medium uppercase text-gray-700">
-                <Link href="/" onClick={() => setOpen(false)}>
-                  Home
-                </Link>
-                <Link href="/about" onClick={() => setOpen(false)}>
-                  About Us
-                </Link>
-                <Link href="/service" onClick={() => setOpen(false)}>
-                  Services
-                </Link>
-                <Link href="/blog" onClick={() => setOpen(false)}>
-                  Blog
-                </Link>
-                <Link href="/links" onClick={() => setOpen(false)}>
-                  Useful Links
-                </Link>
-                <Link href="/contact" onClick={() => setOpen(false)}>
-                  Contact Us
-                </Link>
+              <nav className="flex flex-col gap-4 px-4 py-6 text-sm font-medium uppercase">
+                {navLinks.map((link: NavLink) => (
+                  <Link
+                    key={link.path}
+                    href={link.path}
+                    onClick={() => setOpen(false)}
+                    className={
+                      isActive(link.path)
+                        ? "text-blue-600 font-semibold"
+                        : "text-gray-700"
+                    }
+                  >
+                    {link.name}
+                  </Link>
+                ))}
               </nav>
             </div>
           )}
         </div>
       </header>
 
-      {/* Spacer to prevent content from hiding behind fixed header */}
       <div className="h-[112px]" />
     </>
   );

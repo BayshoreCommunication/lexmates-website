@@ -17,7 +17,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
     .slice(0, 5) // Limit to 5 related services
     .map(([key, value]) => ({
       slug: key,
-      name: value.name
+      name: value.name,
     }));
 
   return (
@@ -32,25 +32,29 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
       />
 
       <section className="max-w-[1320px] mx-auto px-8 py-8 md:my-8 grid grid-cols-1 lg:grid-cols-4 gap-10">
-        
         {/* Sidebar */}
         <aside className="lg:col-span-1 space-y-8">
-          
           {/* Experience Card */}
-          <div className="relative overflow-hidden rounded-md">
+          <div className="relative overflow-hidden rounded-md min-h-72">
             <Image
               src="/images/home/service/title-img.png"
               alt="Experience"
-              width={1000}
-              height={800}
-              className="object-contain"
+              // width={1000}
+              // height={800}
+              fill
+              className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-black/60 flex flex-col items-center justify-center text-white text-center p-8">
-              <h3 className="text-4xl font-bold mb-2">25 Years of</h3>
-              <p className="mb-4 text-4xl">Experience In This Field</p>
+
+            <div className="absolute inset-0 bg-black/60 flex flex-col items-center justify-center text-white text-center px-6 py-10">
+              <h3 className="text-4xl font-bold leading-tight">25 Years of</h3>
+
+              <p className="text-4xl leading-tight mt-2">
+                Experience In This Field
+              </p>
+
               <Link
                 href="/contact"
-                className="bg-orange-500 hover:bg-orange-600 transition px-4 py-2 text-sm font-semibold rounded"
+                className="mt-6 bg-orange-500 hover:bg-orange-600 transition px-6 py-3 text-sm font-semibold rounded"
               >
                 Contact Us Now
               </Link>
