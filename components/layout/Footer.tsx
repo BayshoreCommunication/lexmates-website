@@ -86,12 +86,12 @@ export default function Footer() {
             Reserved.
           </p>
 
-          <Link
+          {/* <Link
             href="#"
             className="w-8 h-8 flex items-center justify-center bg-white text-[#1f2a44] rounded"
           >
             <FaFacebookF />
-          </Link>
+          </Link> */}
         </div>
       </div>
     </footer>
