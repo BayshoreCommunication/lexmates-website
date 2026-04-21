@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 
-import "./globals.css";
-import { Providers } from "./providers";
-import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import Header from "@/components/layout/Header";
+import "./globals.css";
 // import { DM_Mono } from 'next/font/google';
 // import { Inter, Playfair_Display } from 'next/font/google';// Your global styles file
 
@@ -23,8 +22,9 @@ import Footer from "@/components/layout/Footer";
 // });
 
 export const metadata: Metadata = {
-  title: "Lexmates",
-  description: "Lexmates Website",
+  title: "Lexmates - Professional Law Firm in Dhaka, Bangladesh",
+  description:
+    "Expert legal services in Dhaka. Lexmates provides top-notch representation in business law, family matters, criminal cases, and tax services.",
   metadataBase: new URL("https://www.lexmates.com"),
   alternates: {
     canonical: "/",
