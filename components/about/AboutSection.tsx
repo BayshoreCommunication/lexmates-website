@@ -1,17 +1,15 @@
 import Image from "next/image";
-import Link from "next/link";
 
 export default function AboutSection() {
   return (
     <section className="w-full">
       <div className="max-w-[1320px] mx-auto px-8 py-8 md:py-16">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          
           {/* Image Side */}
           <div className="relative flex justify-center lg:justify-start">
             <div className="relative w-full max-w-[500px]">
               <Image
-                src="/images/about/lawer.png"
+                src="/images/7114.webp"
                 alt="About"
                 width={1000}
                 height={800}
@@ -38,16 +36,16 @@ export default function AboutSection() {
               discovered the undoubtable source. Lorem Ipsum comes from sections
               1.10.32 and 1.10.33 of &quot;de Finibus Bonorum et Malorum&quot;.
             </p>
-
+            {/* 
             <Link
               href="/about"
               className="inline-block bg-[#c2b280] hover:bg-[#b4a36f] text-white px-6 py-3 text-sm font-medium transition duration-300"
             >
               More About Us
-            </Link>
+            </Link> */}
 
             {/* Signature */}
-            <div className="mt-8">
+            {/* <div className="mt-8">
               <Image
                 src="/images/about/sign.png"
                 alt="Signature"
@@ -55,9 +53,8 @@ export default function AboutSection() {
                 height={800}
                 className="w-[200px] h-auto"
               />
-            </div>
+            </div> */}
           </div>
-
         </div>
       </div>
     </section>

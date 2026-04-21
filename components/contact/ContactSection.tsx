@@ -1,4 +1,75 @@
+"use client";
+
+import emailjs from "emailjs-com";
+import { useRef, useState } from "react";
+import Swal from "sweetalert2";
+
 export default function ContactSection() {
+  const form = useRef<HTMLFormElement>(null);
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    serviceType: "",
+    caseDescription: "",
+  });
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!form.current) return;
+
+    emailjs
+      .sendForm(
+        "YOUR_SERVICE_ID", // Replace with your EmailJS service ID
+        "YOUR_TEMPLATE_ID", // Replace with your EmailJS template ID
+        form.current,
+        "YOUR_PUBLIC_KEY", // Replace with your EmailJS public key
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+          Swal.fire({
+            icon: "success",
+            title: "Success!",
+            text: "Your message has been sent successfully!",
+            confirmButtonColor: "#3b5b82",
+            confirmButtonText: "OK",
+          });
+          setFormData({
+            name: "",
+            phone: "",
+            email: "",
+            serviceType: "",
+            caseDescription: "",
+          }); // Reset form
+        },
+        (error) => {
+          console.log(error.text);
+          Swal.fire({
+            icon: "error",
+            title: "Error!",
+            text: "Failed to send message. Please try again.",
+            confirmButtonText: "OK",
+            didOpen: () => {
+              const button = document.querySelector(
+                ".swal2-confirm",
+              ) as HTMLElement;
+              if (button) {
+                button.style.backgroundColor = "#dc2626";
+              }
+            },
+          });
+        },
+      );
+  };
+
   return (
     <section className="w-full py-20">
       <div className="max-w-[1320px] mx-auto px-8">
@@ -57,18 +128,26 @@ export default function ContactSection() {
               Quick Contact Now
             </h2>
 
-            <form className="space-y-6">
+            <form ref={form} onSubmit={sendEmail} className="space-y-6">
               {/* Row 1 */}
               <div className="grid sm:grid-cols-2 gap-6">
                 <input
                   type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
                   placeholder="Your Name"
-                  className="w-full bg-gray-200 px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-orange-500"
+                  className="w-full bg-gray-200 px-4 py-3 text-sm text-gray-900 outline-none "
+                  required
                 />
                 <input
                   type="text"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
                   placeholder="Phone"
-                  className="w-full bg-gray-200 px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-orange-500"
+                  className="w-full bg-gray-200 px-4 py-3 text-sm text-gray-900 outline-none"
+                  required
                 />
               </div>
 
@@ -76,21 +155,33 @@ export default function ContactSection() {
               <div className="grid sm:grid-cols-2 gap-6">
                 <input
                   type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
                   placeholder="Email"
-                  className="w-full bg-gray-200 px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-orange-500"
+                  className="w-full bg-gray-200 px-4 py-3 text-sm text-gray-900 outline-none "
+                  required
                 />
                 <input
                   type="text"
+                  name="serviceType"
+                  value={formData.serviceType}
+                  onChange={handleChange}
                   placeholder="Business Law"
-                  className="w-full bg-gray-200 px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-orange-500"
+                  className="w-full bg-gray-200 px-4 py-3 text-sm text-gray-900 outline-none "
+                  required
                 />
               </div>
 
               {/* Message */}
               <textarea
+                name="caseDescription"
+                value={formData.caseDescription}
+                onChange={handleChange}
                 placeholder="Case Description"
                 rows={5}
-                className="w-full bg-gray-200 px-4 py-3 text-sm outline-none resize-none focus:ring-2 focus:ring-orange-500"
+                className="w-full bg-gray-200 px-4 py-3 text-sm text-gray-900 outline-none resize-none "
+                required
               />
 
               {/* Button */}

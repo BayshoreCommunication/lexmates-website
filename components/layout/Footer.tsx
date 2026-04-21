@@ -49,28 +49,19 @@ export default function Footer() {
             <h4 className="text-lg font-semibold">Useful Links</h4>
             <ul className="space-y-2 text-sm text-gray-300">
               <li>
-                <Link href="#">Privacy Policy</Link>
+                <Link href="/">Home</Link>
               </li>
               <li>
-                <Link href="#">Disclaimer</Link>
+                <Link href="/about">About Us</Link>
               </li>
               <li>
-                <Link href="#">Supreme Court</Link>
+                <Link href="/service">Services</Link>
               </li>
               <li>
-                <Link href="#">Judicial Portal Bangladesh</Link>
+                <Link href="/blog">Blog</Link>
               </li>
               <li>
-                <Link href="#">NBR</Link>
-              </li>
-              <li>
-                <Link href="#">Laws of Bangladesh</Link>
-              </li>
-              <li>
-                <Link href="#">FAQ</Link>
-              </li>
-              <li>
-                <Link href="#">Press</Link>
+                <Link href="/contact">Contact Us</Link>
               </li>
             </ul>
           </div>

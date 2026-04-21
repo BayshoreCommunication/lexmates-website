@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { usePathname } from "next/navigation";
+import { ChevronDown, Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { MapPin, Phone, Mail, Menu, X, ChevronDown } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 interface NavLink {
   name: string;
@@ -120,7 +120,11 @@ export default function Header() {
                 className="md:hidden"
                 aria-label="Toggle Menu"
               >
-                {open ? <X size={28} /> : <Menu size={28} />}
+                {open ? (
+                  <X size={28} />
+                ) : (
+                  <Menu size={28} className="text-black" />
+                )}
               </button>
             </div>
           </div>
