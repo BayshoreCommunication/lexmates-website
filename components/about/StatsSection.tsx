@@ -49,7 +49,7 @@ export default function StatsSection() {
       
       {/* Background Image */}
       <Image
-        src="/images/breadcrumb/bg.png" // put your image in public/images/
+        src="/images/breadcrumb/bg.png" // put your image in public/images
         alt="Background"
         fill
         className="object-cover"
