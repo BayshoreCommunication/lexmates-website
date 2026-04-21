@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { FaFacebookF } from "react-icons/fa";
 
 export default function Footer() {
   return (
@@ -82,16 +81,20 @@ export default function Footer() {
         {/* Divider */}
         <div className="border-t border-gray-500/30 mt-12 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-gray-400">
-            © Copyright Lexmates {new Date().getFullYear()}. All Rights
-            Reserved.
+            © Copyright Lexmates {new Date().getFullYear()}. All Rights Reserved.
           </p>
 
-          {/* <Link
-            href="#"
-            className="w-8 h-8 flex items-center justify-center bg-white text-[#1f2a44] rounded"
-          >
-            <FaFacebookF />
-          </Link> */}
+          <p className="text-sm text-gray-400">
+            Design &amp; Developed by{" "}
+            <Link
+              href="https://www.bayshorecommunication.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white hover:underline"
+            >
+              BayShore Communication
+            </Link>
+          </p>
         </div>
       </div>
     </footer>
