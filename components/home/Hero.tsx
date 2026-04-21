@@ -2,11 +2,17 @@
 
 import emailjs from "emailjs-com";
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import Swal from "sweetalert2";
 
+const SERVICE_ID = "service_e046rqt";
+const TEMPLATE_ID = "template_90aw2qd";
+const PUBLIC_KEY = "KM4HJj4iFHnCM8EbS";
+
+emailjs.init(PUBLIC_KEY);
+
 export default function Hero() {
-  const form = useRef<HTMLFormElement>(null);
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     phone: "",
@@ -22,30 +28,41 @@ export default function Hero() {
 
   const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true);
 
-    if (!form.current) return;
+    const submittedAt = new Date().toLocaleString("en-US", {
+      dateStyle: "medium",
+      timeStyle: "short",
+    });
 
     emailjs
-      .sendForm(
-        "YOUR_SERVICE_ID", // Replace with your EmailJS service ID
-        "YOUR_TEMPLATE_ID", // Replace with your EmailJS template ID
-        form.current,
-        "YOUR_PUBLIC_KEY", // Replace with your EmailJS public key
-      )
+      .send(SERVICE_ID, TEMPLATE_ID, {
+        email: formData.email,
+        phone: formData.phone,
+        consultFor: formData.consultFor,
+        query: formData.query,
+        time: submittedAt,
+      })
       .then(
-        (result) => {
-          console.log(result.text);
+        () => {
+          setLoading(false);
           Swal.fire({
             icon: "success",
             title: "Success!",
             text: "Your message has been sent successfully!",
-            confirmButtonColor: "#3b5b82",
             confirmButtonText: "OK",
+            didOpen: () => {
+              const button = document.querySelector(
+                ".swal2-confirm",
+              ) as HTMLElement;
+              if (button) button.style.backgroundColor = "#3b5b82";
+            },
           });
-          setFormData({ email: "", phone: "", consultFor: "", query: "" }); // Reset form
+          setFormData({ email: "", phone: "", consultFor: "", query: "" });
         },
         (error) => {
-          console.log(error.text);
+          setLoading(false);
+          console.error("EmailJS error:", error);
           Swal.fire({
             icon: "error",
             title: "Error!",
@@ -55,9 +72,7 @@ export default function Hero() {
               const button = document.querySelector(
                 ".swal2-confirm",
               ) as HTMLElement;
-              if (button) {
-                button.style.backgroundColor = "#dc2626";
-              }
+              if (button) button.style.backgroundColor = "#dc2626";
             },
           });
         },
@@ -90,7 +105,7 @@ export default function Hero() {
             Request Free Consultation
           </h2>
 
-          <form ref={form} onSubmit={sendEmail} className="space-y-4">
+          <form onSubmit={sendEmail} className="space-y-4">
             <input
               type="email"
               name="email"
@@ -133,9 +148,36 @@ export default function Hero() {
 
             <button
               type="submit"
-              className="w-full rounded bg-orange-500 py-3 text-sm font-semibold uppercase text-white hover:bg-orange-600"
+              disabled={loading}
+              className="flex w-full items-center justify-center gap-2 rounded bg-orange-500 py-3 text-sm font-semibold uppercase text-white hover:bg-orange-600 disabled:cursor-not-allowed disabled:opacity-70"
             >
-              Send Request
+              {loading ? (
+                <>
+                  <svg
+                    className="h-4 w-4 animate-spin text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    />
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8v8H4z"
+                    />
+                  </svg>
+                  Sending...
+                </>
+              ) : (
+                "Send Request"
+              )}
             </button>
           </form>
         </div>

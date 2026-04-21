@@ -4,8 +4,15 @@ import emailjs from "emailjs-com";
 import { useRef, useState } from "react";
 import Swal from "sweetalert2";
 
+const SERVICE_ID = "service_e046rqt";
+const TEMPLATE_ID = "template_90aw2qd"; // TODO: replace with your contact template ID once created
+const PUBLIC_KEY = "KM4HJj4iFHnCM8EbS";
+
+emailjs.init(PUBLIC_KEY);
+
 export default function ContactSection() {
   const form = useRef<HTMLFormElement>(null);
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -22,25 +29,34 @@ export default function ContactSection() {
 
   const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    if (!form.current) return;
+    setLoading(true);
 
     emailjs
-      .sendForm(
-        "YOUR_SERVICE_ID", // Replace with your EmailJS service ID
-        "YOUR_TEMPLATE_ID", // Replace with your EmailJS template ID
-        form.current,
-        "YOUR_PUBLIC_KEY", // Replace with your EmailJS public key
-      )
+      .send(SERVICE_ID, TEMPLATE_ID, {
+        email: formData.email,
+        phone: formData.phone,
+        name: formData.name,
+        consultFor: formData.serviceType,
+        query: formData.caseDescription,
+        time: new Date().toLocaleString("en-US", {
+          dateStyle: "medium",
+          timeStyle: "short",
+        }),
+      })
       .then(
-        (result) => {
-          console.log(result.text);
+        () => {
+          setLoading(false);
           Swal.fire({
             icon: "success",
             title: "Success!",
             text: "Your message has been sent successfully!",
-            confirmButtonColor: "#3b5b82",
             confirmButtonText: "OK",
+            didOpen: () => {
+              const button = document.querySelector(
+                ".swal2-confirm",
+              ) as HTMLElement;
+              if (button) button.style.backgroundColor = "#3b5b82";
+            },
           });
           setFormData({
             name: "",
@@ -48,10 +64,11 @@ export default function ContactSection() {
             email: "",
             serviceType: "",
             caseDescription: "",
-          }); // Reset form
+          });
         },
         (error) => {
-          console.log(error.text);
+          setLoading(false);
+          console.error("EmailJS error:", error);
           Swal.fire({
             icon: "error",
             title: "Error!",
@@ -61,9 +78,7 @@ export default function ContactSection() {
               const button = document.querySelector(
                 ".swal2-confirm",
               ) as HTMLElement;
-              if (button) {
-                button.style.backgroundColor = "#dc2626";
-              }
+              if (button) button.style.backgroundColor = "#dc2626";
             },
           });
         },
@@ -86,7 +101,6 @@ export default function ContactSection() {
             </p>
 
             <div className="space-y-8">
-              {/* Address */}
               <div>
                 <h4 className="font-semibold text-gray-800 mb-1">Address</h4>
                 <p className="text-gray-500 text-sm">
@@ -98,19 +112,16 @@ export default function ContactSection() {
                 </p>
               </div>
 
-              {/* Phone */}
               <div>
                 <h4 className="font-semibold text-gray-800 mb-1">Phone</h4>
                 <p className="text-gray-500 text-sm">+8801727145247</p>
               </div>
 
-              {/* Email */}
               <div>
                 <h4 className="font-semibold text-gray-800 mb-1">Email</h4>
                 <p className="text-gray-500 text-sm">parvez.hashem@gmail.com</p>
               </div>
 
-              {/* Office Hours (optional add) */}
               <div>
                 <h4 className="font-semibold text-gray-800 mb-1">
                   Working Hours
@@ -129,7 +140,6 @@ export default function ContactSection() {
             </h2>
 
             <form ref={form} onSubmit={sendEmail} className="space-y-6">
-              {/* Row 1 */}
               <div className="grid sm:grid-cols-2 gap-6">
                 <input
                   type="text"
@@ -137,7 +147,7 @@ export default function ContactSection() {
                   value={formData.name}
                   onChange={handleChange}
                   placeholder="Your Name"
-                  className="w-full bg-gray-200 px-4 py-3 text-sm text-gray-900 outline-none "
+                  className="w-full bg-gray-200 px-4 py-3 text-sm text-gray-900 outline-none"
                   required
                 />
                 <input
@@ -151,7 +161,6 @@ export default function ContactSection() {
                 />
               </div>
 
-              {/* Row 2 */}
               <div className="grid sm:grid-cols-2 gap-6">
                 <input
                   type="email"
@@ -159,7 +168,7 @@ export default function ContactSection() {
                   value={formData.email}
                   onChange={handleChange}
                   placeholder="Email"
-                  className="w-full bg-gray-200 px-4 py-3 text-sm text-gray-900 outline-none "
+                  className="w-full bg-gray-200 px-4 py-3 text-sm text-gray-900 outline-none"
                   required
                 />
                 <input
@@ -168,28 +177,54 @@ export default function ContactSection() {
                   value={formData.serviceType}
                   onChange={handleChange}
                   placeholder="Business Law"
-                  className="w-full bg-gray-200 px-4 py-3 text-sm text-gray-900 outline-none "
+                  className="w-full bg-gray-200 px-4 py-3 text-sm text-gray-900 outline-none"
                   required
                 />
               </div>
 
-              {/* Message */}
               <textarea
                 name="caseDescription"
                 value={formData.caseDescription}
                 onChange={handleChange}
                 placeholder="Case Description"
                 rows={5}
-                className="w-full bg-gray-200 px-4 py-3 text-sm text-gray-900 outline-none resize-none "
+                className="w-full bg-gray-200 px-4 py-3 text-sm text-gray-900 outline-none resize-none"
                 required
               />
 
-              {/* Button */}
               <button
                 type="submit"
-                className="bg-primary hover:bg-[#b4a36f] text-white px-8 py-3 text-sm font-medium transition duration-300"
+                disabled={loading}
+                style={{ width: "200px" }}
+                className="bg-primary hover:bg-[#b4a36f] disabled:opacity-70 disabled:cursor-not-allowed text-white py-3 text-sm font-medium transition duration-300 flex items-center justify-center gap-2"
               >
-                Appointment
+                {loading ? (
+                  <>
+                    <svg
+                      className="animate-spin h-4 w-4 text-white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      />
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8v8H4z"
+                      />
+                    </svg>
+                    Sending...
+                  </>
+                ) : (
+                  "Appointment"
+                )}
               </button>
             </form>
           </div>
