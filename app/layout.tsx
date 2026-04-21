@@ -25,7 +25,7 @@ import Footer from "@/components/layout/Footer";
 export const metadata: Metadata = {
   title: "Lexmates",
   description: "Lexmates Website",
-  metadataBase: new URL("https://mccullochlawpa-website.vercel.app"),
+  metadataBase: new URL("https://www.lexmates.com"),
   alternates: {
     canonical: "/",
     languages: {
